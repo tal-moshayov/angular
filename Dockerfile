@@ -17,9 +17,18 @@ RUN wget https://ftp.mozilla.org/pub/firefox/releases/38.0/linux-x86_64/en-US/fi
     && mv firefox /opt/firefox-38.0 \
     && ln -sf /opt/firefox-38.0/firefox /usr/bin/firefox
 
-COPY . /usr/src/app
-RUN ./scripts/ci/install_chromium.sh
-RUN ./scripts/ci/install_dart.sh stable latest linux-x64
+# chromium
+ADD ./scripts/ci/install_chromium.sh /tmp/ 
+RUN chmod +x /tmp/install_chromium.sh
+RUN /tmp/install_chromium.sh
+
+# dart
+ADD ./scripts/ci/install_dart.sh /tmp/
+RUN chmod +x /tmp/install_dart.sh
+RUN /tmp/install_dart.sh stable latest linux-x64
+
+# npm install (Cached yeepee!)
+ADD ./package.json /usr/src/app/
 RUN node ./tools/npm/check-node-modules --purge && npm install
 
-CMD [ "npm", "start" ]
+COPY . /usr/src/app
