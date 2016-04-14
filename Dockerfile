@@ -29,6 +29,6 @@ RUN /tmp/install_dart.sh stable latest linux-x64
 
 # npm install (Cached yeepee!)
 ADD ./package.json /usr/src/app/
-RUN node ./tools/npm/check-node-modules --purge && npm install
+RUN npm clean && npm install
 
 COPY . /usr/src/app
