@@ -49,6 +49,7 @@ ADD ./bower.json ./
 RUN npm install -g bower
 RUN bower install --allow-root
 
+RUN npm install -g tsd 
 RUN cd $(npm root -g)/npm \
  && npm install fs-extra \
  && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
