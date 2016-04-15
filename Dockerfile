@@ -22,12 +22,12 @@ RUN wget https://ftp.mozilla.org/pub/firefox/releases/38.0/linux-x86_64/en-US/fi
     && mv firefox /opt/firefox-38.0 \
     && ln -sf /opt/firefox-38.0/firefox /usr/bin/firefox
 
-#https://github.com/npm/npm/issues/9863#issuecomment-209194124
-RUN echo "root: $(npm root -g)"
-RUN cd $(npm root -g)/npm && npm install fs-extra 
-RUN echo "new root: $(npm root -g)"
-RUN cd $(npm root -g) && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
 RUN npm install -g npm@3.5.3
+
+#https://github.com/npm/npm/issues/9863#issuecomment-209194124
+RUN cd $(npm root -g)/npm && npm install fs-extra 
+RUN ls -ltr /usr/local/lib/node_modules/
+RUN cd $(npm root -g) && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
 RUN npm version
 
 # chromium
