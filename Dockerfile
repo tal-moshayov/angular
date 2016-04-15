@@ -3,6 +3,8 @@ FROM node:latest
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+RUN nvm install 5.4.1
+
 RUN apt-get update
 RUN apt-get -y install software-properties-common python-software-properties
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
