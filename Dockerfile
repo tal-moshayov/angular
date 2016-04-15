@@ -45,7 +45,7 @@ RUN npm cache clean
 RUN npm install
 
 # bower cache
-ADD ./bower.json
+ADD ./bower.json ./
 RUN bower install
 
 COPY . /usr/src/app 
