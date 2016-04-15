@@ -5,9 +5,8 @@ WORKDIR /usr/src/app
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
 RUN echo . ~/.nvm/nvm.sh >> $HOME/.bash_profile
-RUN cat $HOME/.bash_profile
 ENV PATH $HOME/.nvm/bin:$PATH
-RUN source $HOME/.nvm/nvm.sh && nvm install 5.4.1
+RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && nvm install 5.4.1"
 
 RUN apt-get update
 RUN apt-get -y install software-properties-common python-software-properties
