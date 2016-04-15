@@ -59,3 +59,5 @@ COPY . /usr/src/app
 # http://stackoverflow.com/questions/30549163/angular2-build-process-fails
 #RUN cd tools && npm install
 RUN cd tools && tsd install
+
+RUN npm install -g npm@3.5.3
