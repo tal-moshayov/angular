@@ -1,12 +1,12 @@
-FROM node:latest
+FROM node:5.4.1
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
-RUN echo . ~/.nvm/nvm.sh >> $HOME/.bash_profile
-ENV PATH $HOME/.nvm/bin:$PATH
-RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && nvm install 5.4.1"
+#RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
+#RUN echo . ~/.nvm/nvm.sh >> $HOME/.bash_profile
+#ENV PATH $HOME/.nvm/bin:$PATH
+#RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && nvm install 5.4.1"
 
 RUN apt-get update
 RUN apt-get -y install software-properties-common python-software-properties
