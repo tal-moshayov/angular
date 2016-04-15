@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:5.4.1
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -25,7 +25,9 @@ RUN wget https://ftp.mozilla.org/pub/firefox/releases/38.0/linux-x86_64/en-US/fi
 #https://github.com/npm/npm/issues/9863#issuecomment-209194124
 RUN cd $(npm root -g)/npm && npm install fs-extra 
 RUN ls -ltr /usr/local/lib/node_modules/
-RUN cd $(npm root -g) && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
+
+#RUN cd $(npm root -g) && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
+
 RUN npm install -g npm@3.5.3
 RUN npm version
 
