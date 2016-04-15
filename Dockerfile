@@ -43,17 +43,19 @@ RUN /tmp/install_dart.sh stable latest linux-x64
 ADD ./package.json /usr/src/app/
 RUN npm cache clean
 RUN npm install
+RUN npm install -g bower tsd
 
 # bower cache
 ADD ./bower.json ./
-RUN npm install -g bower
 RUN bower install --allow-root
 
-RUN npm install -g tsd 
+#https://github.com/npm/npm/issues/9863#issuecomment-209194124
 RUN cd $(npm root -g)/npm \
  && npm install fs-extra \
  && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
 
-COPY . /usr/src/app 
-RUN cd tools && npm install
+COPY . /usr/src/app
+
+# http://stackoverflow.com/questions/30549163/angular2-build-process-fails
+#RUN cd tools && npm install
 RUN cd tools && tsd install
