@@ -44,6 +44,10 @@ ADD ./package.json /usr/src/app/
 RUN npm cache clean
 RUN npm install
 
+# bower cache
+ADD ./bower.json
+RUN bower install
+
 COPY . /usr/src/app 
 RUN cd tools && npm install
 RUN cd tools && tsd install
