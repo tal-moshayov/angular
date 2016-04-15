@@ -22,15 +22,6 @@ RUN wget https://ftp.mozilla.org/pub/firefox/releases/38.0/linux-x86_64/en-US/fi
     && mv firefox /opt/firefox-38.0 \
     && ln -sf /opt/firefox-38.0/firefox /usr/bin/firefox
 
-#https://github.com/npm/npm/issues/9863#issuecomment-209194124
-RUN cd $(npm root -g)/npm && npm install fs-extra 
-RUN ls -ltr /usr/local/lib/node_modules/
-
-#RUN cd $(npm root -g) && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
-
-RUN npm install -g npm@3.5.3
-RUN npm version
-
 # chromium
 ADD ./scripts/ci/install_chromium.sh /tmp/ 
 RUN chmod +x /tmp/install_chromium.sh
@@ -40,6 +31,13 @@ RUN /tmp/install_chromium.sh
 ADD ./scripts/ci/install_dart.sh /tmp/
 RUN chmod +x /tmp/install_dart.sh
 RUN /tmp/install_dart.sh stable latest linux-x64
+
+# npm
+#RUN rm -rf /usr/lib/node_modules/npm
+#RUN mkdir -p /tmp/src
+#WORKDIR /tmp/src
+#RUN curl -L https://github.com/npm/npm/archive/v3.5.3.tar.gz | tar zxf - && cd npm-3.5.3 && make && make install
+#WORKDIR /usr/src/app
 
 # npm install (Cached yeepee!)
 ADD ./package.json /usr/src/app/
@@ -51,8 +49,16 @@ RUN npm install -g bower tsd
 ADD ./bower.json ./
 RUN bower install --allow-root
 
+#https://github.com/npm/npm/issues/9863#issuecomment-209194124
+RUN cd $(npm root -g)/npm \
+ && npm install fs-extra \
+ && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
+
 COPY . /usr/src/app
 
 # http://stackoverflow.com/questions/30549163/angular2-build-process-fails
 #RUN cd tools && npm install
 RUN cd tools && tsd install
+
+RUN npm install -g npm@3.5.3
+RUN npm version
