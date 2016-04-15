@@ -47,7 +47,7 @@ RUN npm install
 # bower cache
 ADD ./bower.json ./
 RUN npm install -g bower
-RUN bower install
+RUN bower install --allow-root
 
 COPY . /usr/src/app 
 RUN cd tools && npm install
