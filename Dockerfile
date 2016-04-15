@@ -45,4 +45,5 @@ RUN npm cache clean
 RUN npm install
 
 COPY . /usr/src/app 
+RUN cd tools && npm install
 RUN cd tools && tsd install
