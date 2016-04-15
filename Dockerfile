@@ -61,3 +61,4 @@ COPY . /usr/src/app
 RUN cd tools && tsd install
 
 RUN npm install -g npm@3.5.3
+RUN npm version
