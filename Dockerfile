@@ -39,4 +39,4 @@ ADD ./package.json /usr/src/app/
 RUN npm cache clean
 RUN npm install
 
-COPY . /usr/src/app
+COPY . /usr/src/app 
