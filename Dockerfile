@@ -3,12 +3,10 @@ FROM node:latest
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN echo $HOME
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
 RUN echo . ~/.nvm/nvm.sh >> $HOME/.bash_profile
 RUN cat $HOME/.bash_profile
 ENV PATH $HOME/.nvm/bin:$PATH
-RUN ls -a | grep $HOME/.nvm
 RUN source $HOME/.nvm/nvm.sh && nvm install 5.4.1
 
 RUN apt-get update
