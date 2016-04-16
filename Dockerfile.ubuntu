@@ -50,5 +50,3 @@ ADD ./scripts/ci/install_dart.sh /tmp/
 RUN chmod +x /tmp/install_dart.sh
 RUN /tmp/install_dart.sh stable latest linux-x64
 
-RUN node --version
-RUN npm --version
