@@ -52,4 +52,3 @@ RUN /tmp/install_dart.sh stable latest linux-x64
 
 RUN node --version
 RUN npm --version
-RUN nvm --version
