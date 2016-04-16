@@ -50,9 +50,14 @@ ADD ./scripts/ci/install_dart.sh /tmp/
 RUN chmod +x /tmp/install_dart.sh
 RUN /tmp/install_dart.sh stable latest linux-x64
 
+ADD ./package.json /usr/src/app/
+RUN npm cache clean
+RUN npm install
+RUN npm install -g bower tsd
+
+# bower cache
+ADD ./bower.json ./
+RUN bower install --allow-root
+
 # npm install (Cached yeepee!)
-#https://github.com/npm/npm/issues/9863#issuecomment-209194124
-RUN cd $(npm root -g)/npm \
- && npm install fs-extra \
- && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs\.move/ ./lib/utils/rename.js
 RUN npm install -g npm@3.5.3
