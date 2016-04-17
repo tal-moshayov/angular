@@ -55,7 +55,6 @@ RUN echo "RAMTMP=no" >> /etc/default/rcS
 
 # npm Cache
 ADD ./package.json /usr/src/app/
-RUN npm install -g npm@3.5.3
 RUN npm install
 RUN npm install -g bower tsd
 RUN npm info
