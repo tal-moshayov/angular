@@ -62,3 +62,4 @@ RUN bower install --allow-root
 
 COPY . /usr/src/app
 RUN cd tools && tsd install
+
