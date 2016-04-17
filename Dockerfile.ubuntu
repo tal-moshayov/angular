@@ -54,9 +54,9 @@ RUN /tmp/install_dart.sh stable latest linux-x64
 RUN echo "RAMTMP=no" >> /etc/default/rcS
 
 # npm Cache
+ADD ./package.json /usr/src/app/
 RUN npm install npm@3.5.3
 RUN npm info
-ADD ./package.json /usr/src/app/
 RUN npm cache clean
 RUN npm install
 RUN npm install -g bower tsd
