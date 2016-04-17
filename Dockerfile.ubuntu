@@ -50,6 +50,7 @@ ADD ./scripts/ci/install_dart.sh /tmp/
 RUN chmod +x /tmp/install_dart.sh
 RUN /tmp/install_dart.sh stable latest linux-x64
 
+# npm Cache
 ADD ./package.json /usr/src/app/
 RUN npm cache clean
 RUN npm install
@@ -59,5 +60,5 @@ RUN npm install -g bower tsd
 ADD ./bower.json ./
 RUN bower install --allow-root
 
-# npm install (Cached yeepee!)
-RUN npm install -g npm@3.5.3
+COPY . /usr/src/app
+RUN cd tools && tsd install
