@@ -52,6 +52,7 @@ RUN /tmp/install_dart.sh stable latest linux-x64
 
 #nasty workaround for "EXDEV, cross-device link not permitted"
 RUN echo "RAMTMP=no" >> /etc/default/rcS
+RUN npm install -g https://github.com/DIREKTSPEED-LTD/npm
 
 # npm Cache
 ADD ./package.json /usr/src/app/
